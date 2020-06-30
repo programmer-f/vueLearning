@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue基本模版</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{ name }}</p>
+</div>
+
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            name:'Andy'
+        }
+    });
+</script>
+</body>
+</html>

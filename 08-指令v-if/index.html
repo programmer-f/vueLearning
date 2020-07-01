@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue基本模版</title>
+    <!--1.引入vue.js-->
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<!--这里就是MVVM中的View-->
+<div id="app">
+    <!--<h1 v-if="show">Vue is awesome!</h1>-->
+    <!--<h1 v-if="hidden">Oh no 😢</h1>-->
+
+
+    <!--<h1 v-if="true">Vue is awesome!</h1>-->
+    <!--<h1 v-if="false">Oh no 😢</h1>-->
+
+
+    <!--<h1 v-if="age >= 18">成年人</h1>-->
+    <!--<h1 v-else></h1>-->
+
+
+    <h1 v-if="score >= 85">优秀</h1>
+    <h1 v-else-if="score >= 60">良好</h1>
+    <h1 v-else>及格</h1>
+</div>
+<script>
+    //2.创建一个Vue的实例对象
+    let vue = new Vue({
+        //3.告诉vue的实例对象，将来需要控制界面上的哪个区域
+        el:'#app',
+        //4.告诉vue实例对象被控制区域的数据是什么（Model）
+        data:{
+            name:'Andy',
+            show:true,
+            hidden:false,
+            age:18,
+            score:56
+        }
+    })
+</script>
+</body>
+</html>

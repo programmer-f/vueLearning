@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue基本模版</title>
+    <!--1.引入vue.js-->
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<!--这里就是MVVM中的View-->
+<div id="app">
+    <!--<button onclick="alert(666)">button</button>-->
+    <!--<button v-on:click="alert(666)">button</button>-->
+
+    <!--
+    注意点：
+    1.如果是通过v-on来绑定监听事件，那么在指定事件名称的时候不需要写on
+    2.如果是通过v-on来绑定监听事件，那么在赋值的时候必须赋值一个回调函数的名称
+    -->
+    <!--<button v-on:click="myFn">button</button>-->
+    <button @click="myFn">button</button>
+</div>
+<script>
+    //2.创建一个Vue的实例对象
+    let vue = new Vue({
+        //3.告诉vue的实例对象，将来需要控制界面上的哪个区域
+        el:'#app',
+        //4.告诉vue实例对象被控制区域的数据是什么（Model）
+        data:{
+            name:'Andy'
+        },
+        methods:{
+            myFn(){
+                alert(666);
+            }
+        }
+    })
+</script>
+</body>
+</html>

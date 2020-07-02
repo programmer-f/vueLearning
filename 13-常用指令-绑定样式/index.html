@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue基本模版</title>
+    <!--1.引入vue.js-->
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<!--这里就是MVVM中的View-->
+<div id="app">
+    <!--行内样式-->
+    <!--<p style="color:red">我是段落</p>-->
+
+
+    <!--和绑定类名一样，默认情况下v-bind会去Model中查找，找不到所以没有效果-->
+    <!--<p :style="color:'red'">我是段落</p>-->
+
+    <!--如果样式的名称带-，那么也必须用引号括起来才可以-->
+    <!--<p :style="{color:'red','font-size':'100px'}">我是段落</p>-->
+
+    <!--可以直接把model里面的对象设置上来-->
+    <!--<p :style="obj">我是段落</p>-->
+
+    <!--如果model里面保存了多个样式对象，可以把多个对象放在数组里一起设置-->
+    <p :style="[obj1,obj2]">我是段落</p>
+</div>
+<script>
+    //2.创建一个Vue的实例对象
+    let vue = new Vue({
+        //3.告诉vue的实例对象，将来需要控制界面上的哪个区域
+        el:'#app',
+        //4.告诉vue实例对象被控制区域的数据是什么（Model）
+        data:{
+            name:'Andy',
+            obj1:{
+                "color":'skyblue',
+                'font-size':'30px'
+            },
+            obj2:{
+                "background-color":"pink"
+            }
+        }
+    })
+</script>
+</body>
+</html>

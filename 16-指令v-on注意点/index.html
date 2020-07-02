@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue基本模版</title>
+    <!--1.引入vue.js-->
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<!--这里就是MVVM中的View-->
+<div id="app">
+    <!--绑定回调函数的时候，（）可写可不写-->
+    <!--<button @click="fn">button</button>-->
+    <!--<button @click="fn()">button</button>-->
+
+    <!--可以给绑定的回调函数传递参数-->
+    <!--通过传递$event可拿到原生的事件对象-->
+    <button @click="fn($event,666,777)">button</button>
+
+    <!--如果在绑定的函数中需要用到data中的数据必须加上this-->
+    <!--<button @click="fn1">button</button>-->
+</div>
+<script>
+    //2.创建一个Vue的实例对象
+    let vue = new Vue({
+        //3.告诉vue的实例对象，将来需要控制界面上的哪个区域
+        el:'#app',
+        //4.告诉vue实例对象被控制区域的数据是什么（Model）
+        data:{
+            name:'Andy'
+        },
+        methods:{
+            fn(e,...args){
+                console.log(e,args);
+            },
+            fn1(){
+                console.log(this.name);//this指向vue实例
+            }
+        }
+    })
+</script>
+</body>
+</html>

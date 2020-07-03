@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue基本模版</title>
+    <!--1.引入vue.js-->
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<!--这里就是MVVM中的View-->
+<div id="app">
+    <!--直接传递参数-->
+    <!--<p v-color="'blue'">{{name}}</p>-->
+
+    <!--去model里面获取参数-->
+    <p v-color="curColor">{{name}}</p>
+
+    <!--<input type="text" v-focus>-->
+</div>
+<script>
+    /*
+    自定义全局指令
+    第一个参数：指令的名称
+    第二个参数：对象
+    注意点：在自定义指令的时候，在指定指令名称的时候，不需要写v-
+    注意点：指令可以在不同的声明周期阶段执行(钩子函数也有参数，el和一个对象)
+        bind：只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置
+        inserted：被绑定元素插入父节点时调用
+     */
+    Vue.directive('color',{
+        bind(el,obj){
+            // el.style.color = 'red';
+            el.style.color = obj.value;
+        }
+    });
+    Vue.directive('focus',{
+       bind(el){
+           // 在bind阶段,元素还没有被渲染到界面上，没有效果
+           // el.focus();
+       },
+        inserted(el){
+           el.focus();
+        }
+    });
+    //2.创建一个Vue的实例对象
+    let vue = new Vue({
+        //3.告诉vue的实例对象，将来需要控制界面上的哪个区域
+        el:'#app',
+        //4.告诉vue实例对象被控制区域的数据是什么（Model）
+        data:{
+            name:'Andy',
+            curColor:'deepskyblue'
+        }
+    })
+</script>
+</body>
+</html>

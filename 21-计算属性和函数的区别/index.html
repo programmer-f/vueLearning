@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue基本模版</title>
+    <!--1.引入vue.js-->
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<!--这里就是MVVM中的View-->
+<div id="app">
+    <p>{{ msg1() }}</p>
+    <p>{{ msg1() }}</p>
+    <p>{{ msg1() }}</p>
+    <p>{{ msg2 }}</p>
+    <p>{{ msg2 }}</p>
+    <p>{{ msg2 }}</p>
+</div>
+<script>
+    //2.创建一个Vue的实例对象
+    let vue = new Vue({
+        //3.告诉vue的实例对象，将来需要控制界面上的哪个区域
+        el:'#app',
+        //4.告诉vue实例对象被控制区域的数据是什么（Model）
+        data:{
+            name:'Andy',
+            msg:'abcd'
+        },
+        methods:{
+            /*
+            函数的特点：每次调用都会被执行
+            */
+            msg1(){
+                console.log('msg1函数被执行了');
+                return this.msg.split('').reverse().join('');
+            }
+        },
+        computed:{
+            /*
+            计算属性的特点：只要返回的结果没有发生变化，那么计算属性就只会被执行一次
+            计算属性的应用场景：由于计算属性会将返回的结果缓存起来
+                                所以如果返回的数据不经常发生变化，
+                                那么使用计算属性的性能会比使用函数的性能高
+             */
+            msg2:function () {
+                console.log('msg2计算属性被执行了');
+                return this.msg.split('').reverse().join('');
+            }
+        }
+    })
+</script>
+</body>
+</html>

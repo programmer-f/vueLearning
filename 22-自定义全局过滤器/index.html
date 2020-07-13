@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue自定义全局过滤器</title>
+    <!--1.引入vue.js-->
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<!--
+1.什么是过滤器？
+过滤器和函数和计算属性一样，都是用来处理数据的
+（过滤器一般用于格式化插入的文本数据)
+
+2.如何自定义全局过滤器
+Vue.filter('过滤器名称',过滤器处理函数);
+
+3.如何使用全局过滤器（只能在插值语法的v-bind中使用）
+{{ msg | 过滤器名称 }}
+:value="msg | 过滤器名称"
+
+4.注意点：可以连续使用多个过滤器
+
+-->
+<!--这里就是MVVM中的View-->
+<div id="app">
+    <p>{{ str }}</p>
+    <!--vue会把str交给指定的过滤器处理之后，再把处理的结果插入到指定的元素中-->
+    <p>{{ str | formatStr1}}</p>
+    <p>{{ str | formatStr1 | formatStr2 }}</p>
+</div>
+<script>
+    /*
+    如何自定义一个全局过滤器
+    通过Vue.filter();
+    filter方法接收两个参数
+    第一个参数：过滤器的名称
+    第二个参数：处理数据的函数
+    注意点：默认情况下处理数据的函数接收一个参数，就是当前要被处理的数据
+     */
+    //定义全局的过滤器，用来格式化文本
+    Vue.filter('formatStr1',(value)=>{
+        value = value.replace(/大学/g,'中学');
+        console.log(value);
+        return value;
+    });
+    Vue.filter('formatStr2',(value)=>{
+        value = value.replace(/中学/g,'小学');
+        console.log(value);
+        return value;
+    });
+    //2.创建一个Vue的实例对象
+    let vue = new Vue({
+        //3.告诉vue的实例对象，将来需要控制界面上的哪个区域
+        el:'#app',
+        //4.告诉vue实例对象被控制区域的数据是什么（Model）
+        data:{
+            name:'Andy',
+            str:'西安邮电大学，区块连大学，顺丰大学'
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue基本模版</title>
+    <!--1.引入vue.js-->
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<!--这里就是MVVM中的View-->
+<div id="app">
+    <!--<p>{{time}}</p>-->
+    <p>{{time | dateFormat}}</p>
+    <!--<p>{{time | dateFormat('yyyy-MM-dd')}}</p>-->
+</div>
+<script>
+    /*
+    定义全局的格式化时间的过滤器
+    一般情况下，月日时分秒在不够两位的情况下给前面补0（可以使用padStart方法）
+    padStart方法是字符串的方法，先将要处理的数据变成字符串
+    padStart(maxLength，fillString)；
+     */
+    Vue.filter('dateFormat',function (value,formatStr) {
+        let date = new Date(value);
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1 + "";
+        let day = date.getDate() + "";
+        let hour = date.getHours() + "";
+        let minute = date.getMinutes() + "";
+        let second = date.getSeconds() + "";
+
+        console.log(formatStr);
+        if (formatStr && formatStr === 'yyyy-MM-dd') {
+            return `${year}-${month.padStart(2,'0')}-${day}`;
+        }
+        return `${year}-${month.padStart(2,'0')}-${day.padStart(2,'0')} ${hour.padStart(2,'0')}:${minute.padStart(2,'0')}:${second.padStart(2,'0')}`;
+    });
+    //2.创建一个Vue的实例对象
+    let vue = new Vue({
+        //3.告诉vue的实例对象，将来需要控制界面上的哪个区域
+        el:'#app',
+        //4.告诉vue实例对象被控制区域的数据是什么（Model）
+        data:{
+            time:Date.now()
+        }
+    })
+</script>
+</body>
+</html>

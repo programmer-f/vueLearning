@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/vue.js"></script>
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #app{
+            width: 800px;
+            margin: 50px auto;
+            background-color: skyblue;
+        }
+        form{
+            width: 100%;     
+            display: flex;
+            justify-content: space-between;
+        
+        }
+        table{
+            width: 100%;
+            background-color: #000;
+        }
+        table tr{
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <form v-show='isShow'>
+            <input type="text" placeholder="input id">
+            <input type="text"  placeholder="input name">
+            <input type="text"  placeholder="input score">
+            <input type="submit" value="add">
+            <input type="submit" value="search">
+        </form>
+        <table>
+            <tr>
+                <th>序号</th>
+                <th>姓名</th>
+                <th>分数</th>
+                <th>时间</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for='(person,index) in persons'>
+                <!-- 
+                    <td><input type="text" :value="person.id" :disabled='isDisabled'></td>
+                <td><input type="text" :value="person.name" :disabled='isDisabled'></td>
+                <td><input type="text" :value="person.score" :disabled='isDisabled'></td>
+                <td><input type="text" :value="person.time | timeFormat()" :disabled='isDisabled'></td> 
+                -->
+                <td><input type="text" v-model="person.id" :disabled='isDisabled'></td>
+                <td><input type="text" v-model="person.name" :disabled='isDisabled'></td>
+                <td><input type="text" v-model="person.score" :disabled='isDisabled'></td>
+                <td><input type="text" :value="person.time | timeFormat()" disabled></td>
+                
+                <td>
+                        <a href="#" @click.prevent='edit'>edit</a>
+                        <a href="#">delete</a>
+                        <a href="#" @click.prevent='toggle'>moreOp</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        // 定义全局的过滤器来处理时间格式
+        Vue.filter('timeFormat',(value,formatStr)=>{
+                let date = new Date(value);
+                let year = date.getFullYear();
+                let month = date.getMonth() + 1 +'';
+                let day = date.getDate() +'';
+                let hour = date.getHours() +'';
+                let minute = date.getMinutes() +'';
+                let second = date.getSeconds() +'';
+                if(formatStr === 'yyyy-MM-dd'){
+                    return `${year}-${month.padStart(2,'0')}-${day.padStart(2,'0')}`;
+                }
+                return `${year}-${month.padStart(2,'0')}-${day.padStart(2,'0')} ${hour.padStart(2,'0')}:${minute.padStart(2,'0')}:${second.padStart(2,'0')}`;
+        });
+
+
+        let vue = new Vue({
+            el:'#app',
+            data:{
+                    isDisabled:true,
+                    isShow:false,      
+                    persons:[
+                        {
+                            id:1,
+                            name:'andy',
+                            score:100,
+                            time:Date.now()
+                        },
+                        {
+                            id:2,
+                            name:'Ted',
+                            score:90,
+                            time:Date.now()
+                        },
+                        {
+                            id:3,
+                            name:'lisa',
+                            score:80,
+                            time:Date.now()
+                        }
+                    ]          
+            },
+            methods:{
+                edit(){
+                    this.isDisabled = !this.isDisabled;
+                },
+                toggle(){
+                    this.isShow = !this.isShow;
+                }
+            },
+            computed:{
+                
+            }
+        })
+    </script>
+</body>
+</html>

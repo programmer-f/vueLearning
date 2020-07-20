@@ -33,11 +33,11 @@
 <body>
     <div id="app">
         <form v-show='isShow'>
-            <input type="text" placeholder="input id">
-            <input type="text"  placeholder="input name">
-            <input type="text"  placeholder="input score">
-            <input type="submit" value="add">
-            <input type="submit" value="search">
+            <input type="text" placeholder="input id" v-model='person.id'>
+            <input type="text"  placeholder="input name" v-model='person.name'>
+            <input type="text"  placeholder="input score" v-model='person.score'>
+            <input type="submit" value="add" @click.prevent='addPerson'>
+            <input type="submit" value="search" @click.prevent='query'>
         </form>
         <table>
             <tr>
@@ -61,7 +61,7 @@
                 
                 <td>
                         <a href="#" @click.prevent='edit'>edit</a>
-                        <a href="#">delete</a>
+                        <a href="#" @click.prevent='del(index)'>delete</a>
                         <a href="#" @click.prevent='toggle'>moreOp</a>
                 </td>
             </tr>
@@ -108,7 +108,12 @@
                             score:80,
                             time:Date.now()
                         }
-                    ]          
+                    ],
+                    person:{
+                        id:'',
+                        name:'',
+                        score:''
+                    }      
             },
             methods:{
                 edit(){
@@ -116,6 +121,31 @@
                 },
                 toggle(){
                     this.isShow = !this.isShow;
+                },
+                del(index){
+                    // console.log(index);
+                    this.persons.splice(index,1);
+                },
+                addPerson(){
+                    this.person.time = Date.now();
+                    this.persons.push(this.person);
+                    //添加完person后要恢复初始值
+                    this.person = {
+                        id:'',
+                        name:'',
+                        score:''
+                    }
+                },
+                query(){
+                    //按照条件过滤出一个数组
+                    let newPersons = this.persons.filter((person,index)=>{
+                        if(person.score === Number(this.person.score) ){
+                            return true;
+                        }
+                    });
+                console.log(newPersons);
+                //替换persons数组为过滤出来的数组（只要数据改变，界面就会改变）
+                this.persons = newPersons;
                 }
             },
             computed:{

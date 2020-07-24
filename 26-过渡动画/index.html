@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            text-align: center;
+            line-height: 100px;
+            color: white;
+        }
+
+
+        .v-enter{
+                opacity: 0；
+        }
+
+        .v-enter-active{
+                transition: all 3s;
+        }
+
+        .v-enter-to{
+            opacity: 1;
+        }
+
+        .v-leave{
+            opacity: 1;
+        }
+        .v-leave-active{
+            transition: all 3s;
+        }
+        .v-leave-to{
+            opacity: 0;
+        }
+
+    </style>
+    <script src='js/vue.js'></script>
+</head>
+<body>
+    <div id="app">
+        <button @click='toggle'>显示/隐藏</button>
+        <transition>
+            <div id="box" v-show='isShow'>{{name}}</div>
+        </transition>
+    </div>
+    <script>
+        let vue = new Vue({
+            el:'#app',
+            data:{
+                name:'andy',
+                isShow:false
+            },
+            methods:{
+                toggle(){
+                    this.isShow = !this.isShow;
+                }
+            },
+            computed:{
+
+            },
+
+        })
+    </script>
+</body>
+</html>

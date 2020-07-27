@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>自定义全局组件</title>
+ <script src="js/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <!-- 使用注册好的组件 -->
+     <abc></abc>
+</div>
+<script>
+
+    /*
+    如何自定义全局组件？
+    1.创建组件构造器
+    2.注册组件
+    3.使用组件
+    */
+
+let Profile = Vue.extend({
+    //在创建组件，指定模板的时候，模板只能有一个根元素
+    template:
+    `
+       <div>
+          <p>我是段落1</p>
+          <p>我是段落2</p>
+       </div>
+    `,
+});
+
+Vue.component('abc',Profile);
+
+ let app = new Vue({
+  el: "#app",
+  data:{
+      
+  },
+  methods:{
+
+  }
+ })
+</script>
+
+
+</body>
+</html>

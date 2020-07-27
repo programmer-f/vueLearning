@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        <test1></test1>
+    </div>
+
+    <div id="app2">
+        <test2></test2>
+    </div>
+
+    <template id="info1">
+        <div>
+            <p>我是段落1</p>
+            <p>我是段落2</p>
+        </div>
+    </template>
+
+    <template id="info2">
+        <div>
+            <p>222</p>
+            <p>333</p>
+        </div>
+    </template>
+
+
+    <script>
+        let vue1 = new Vue({
+            el:'#app1',
+            data:{
+
+            },
+            methods:{
+
+            },
+            components:{
+                'test1':{
+                    template:'#info1'
+                }
+            }
+        })
+
+        let vue2 = new Vue({
+            el:'#app2',
+            data:{
+
+            },
+            methods:{
+
+            },
+            components:{
+                'test2':{
+                    template:'#info2'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

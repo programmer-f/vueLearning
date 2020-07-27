@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>自定义全局组件</title>
+ <script src="js/vue.js"></script>
+</head>
+
+<body>
+<div id="app1">
+    <!-- 使用注册好的组件 -->
+     <abc></abc>
+</div>
+
+
+
+
+<div id="app2">
+    <abc></abc>
+</div>
+
+<!-- 编写模板，script的type必须为‘text/html’ -->
+<script id="info" type="text/html">
+    <div>
+        <p>我是段落1</p>
+        <p>我是段落2</p>
+    </div>
+</script>
+
+
+
+<!-- 使用template标签来定义模板 -->
+<template id="test">
+    <div>
+        <p>我是段落1</p>
+        <p>我是段落2</p>
+    </div>
+</template>
+
+<script>
+
+    /*
+    如何自定义全局组件？
+    1.创建组件构造器
+    2.注册组件
+    3.使用组件
+
+
+    全局组件在任何一个vue实例的控制区域都可以使用
+    */
+
+// 定义一个全局的组件
+Vue.component('abc',{
+    template:'#test'
+});
+
+ let vue1 = new Vue({
+  el: "#app1",
+  data:{
+      
+  },
+  methods:{
+
+  }
+ });
+
+ let vue2 = new Vue({
+     el:'#app2',
+     data:{
+
+     },
+     methods:{
+
+     }
+ })
+</script>
+
+
+</body>
+</html>
